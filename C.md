@@ -290,6 +290,8 @@ const int b = 23; // Initialisierung
   * Vorher ist der Inhalt (meist) nicht bekannt.
 * Variablen bei der Definition _immer_ initialisieren!
 
+https://en.cppreference.com/w/c/language/const
+
 
 
 ## Basisdatentypen
@@ -362,6 +364,9 @@ const int b = 23; // Initialisierung
 * `127` ist auch `0177` oder `0x7f` bzw. `0x7F`
   * und ggf. `0b1111111`
 * `0x1F` ist $1 \cdot 16 + 15 \cdot 1 = 31$
+
+
+### TODO: Fließkommazahlen
 
 
 
