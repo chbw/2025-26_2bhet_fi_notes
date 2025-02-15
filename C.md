@@ -1,5 +1,5 @@
 ---
-theme: simple
+#theme: simple
 separator: "\n\n\n\n"
 verticalSeparator: "\n\n\n"
 ---
@@ -43,7 +43,8 @@ Auch im Block/über mehrere Zeilen möglich
 // execution starts at main()
 int main(void) // Funktion
 { // {} umfassen mehrere Anweisungen zu einem Block
-    printf("%s\n", "Hallo Welt"); // Funktionsaufruf, der ";" beendet die Anweisung
+    printf("%s\n", "Hallo Welt"); // Funktionsaufruf
+    //  der ";" beendet die Anweisung
 }
 ```
 
@@ -53,48 +54,48 @@ Referenz zur Ausgabe (am Terminal): https://en.cppreference.com/w/c/io/fprintf
 
 ## Anweisungen und Ausdrücke
 
+* Ausdruck (expression)
 * Anweisung (statement)
   * Kann als Block zusammengefasst werden
-* Ausdruck (expression)
-
-
-
-### Anweisung (statement)
-
-Mit `;` abgeschlossen, oder mehrere mit `{}` zu einer Block-Anweisung zusammengefasst.
-
-```C
-c = 1 + 2;
-; // leere Anweisung
-```
-
-Die Zuweisung `c = 1 + 2` ist auch ein Ausdruck (mit dem Wert 3).
-
-https://en.cppreference.com/w/c/language/statements
-
 
 
 ### Ausdruck (expression)
 
-Kombination aus _Operatoren_ und _Operanden_. Kann ausgewertet werden und dabei einen Wert ergeben.
-
-Beispiele
 ```C
-4+5
-a<b
+4 + 5
+a < b
 42
-(23-2)*2
+(23 - 2) * 2
 ```
 
+* Kombination aus _Operatoren_ und _Operanden_. Kann ausgewertet werden und dabei einen Wert ergeben.
+
 https://en.cppreference.com/w/c/language/expressions
+
+
+### Anweisung (statement)
+
+```C
+a = 1 + 2;
+; // leere Anweisung
+{ // Block-Start
+  b = a;
+  c = 3 * b;
+} // Block-Ende
+```
+
+* Mit `;` abgeschlossen, oder mehrere mit `{}` zu einer Block-Anweisung zusammengefasst.
+* Die Zuweisung `c = 1 + 2` ist auch ein Ausdruck (mit dem Wert 3).
+
+https://en.cppreference.com/w/c/language/statements
 
 
 
 ## Operatoren
 
 * Arithmetische Operatoren 
-* Inkrement/Dekrement
 * Zuweisungen
+* Inkrement/Dekrement
 * Logik
 * Vergleich
 * Zugriff
@@ -103,69 +104,115 @@ https://en.cppreference.com/w/c/language/expressions
 
 ### Arithmetische Operatoren
 
-* Summe `+`, Differenz oder Vorzeichenumkehr `-`, Produkt `*`, Quotient `/`, Rest `%`
-* Bitweise: NICHT (Komplement) `~`, UND `&`, ODER `|`, XOR `^`, Shift-Operator `<<` bzw. `>>`
+```C
+a + b; a - b; // Summe, Differenz
+a * b; a / b; a % b; // Produkt, Quotient, Rest
+~a; a & b; a | b; a ^ b; // Komplement (NICHT), UND, ODER, XOR
+a << b; a >> b; // Nach links schieben, nach rechts schieben
+#include <iso646.h>
+compl a; a bitand b;// etc.
+```
 
-Die Operator-Rangfolge ist mathematisch sinnvoll (Punkt vor Strich).
-Dennoch immer empfehlenswert: Klammern setzen!
-Notiz: [iso646.h bei cppreference.com](https://en.cppreference.com/w/c/language/operator_alternative)
-Siehe auch: https://en.cppreference.com/w/c/language/operator_arithmetic
+* Die Operator-Rangfolge ist mathematisch sinnvoll (Punkt vor Strich).
+* Dennoch immer empfehlenswert: Klammern setzen!
 
-
-### Inkrement/Dekrement
-
-* Prefix: `++a` bzw. `--a`
-* Postfix: `a++` bzw. `a--`
-
-Nicht mehrmals in einem Ausdruck verwenden!
-https://en.cppreference.com/w/c/language/operator_incdec
+https://en.cppreference.com/w/c/language/operator_alternative
+https://en.cppreference.com/w/c/language/operator_arithmetic
 
 
 ### Zuweisung
 
+```C
+a = 1;
+b = b + 2;
+b += 2; // identisch zu b = b + 2;
+```
+
 * `=`, von rechts nach links
-* und Kombinationen mit allen arithmetischen Operatoren: `+=` etc.
-  * `a += 2` entspricht `a = a + 2`
+* und Kombinationen mit allen arithmetischen Operatoren: `+=`, `-=`, etc.
 
 https://en.cppreference.com/w/c/language/operator_assignment
 
 
+### Inkrement/Dekrement
+
+```C
+++a; --a; // Prefix
+a++; a--; // Postfix
+b = 2 * a++; // zuerst b = 2 * a, dann wird a erhöht
+a = a++; // undefined
+```
+
+* Die betroffene Variable nicht mehrmals in einem Ausdruck verwenden!
+
+https://en.cppreference.com/w/c/language/operator_incdec
+
+
 ### Logische Operatoren
 
-Nicht mit den bitweisen Operatoren verwechseln!
+```C
+!a; // Nicht
+a && b; // UND
+a || b; // ODER
+#include <iso646.h>
+not a; a and b; // etc.
+```
 
-* Nicht: `!`
-* UND: `&&`
-* ODER: `||`
+* Logisch falsch: 0
+* Logisch wahr: von 0 verschieden
+  * Zwei wahr-Werte können unterschiedlich sein!
+* Nicht mit den bitweisen Operatoren verwechseln!
 
-Logisch falsch: 0
-Logisch wahr: von 0 verschieden
-Notiz: iso646.h
+Notiz: [iso646.h bei cppreference.com](https://en.cppreference.com/w/c/language/operator_alternative)
+https://en.cppreference.com/w/c/language/operator_logical
 
 
 ### Vergleiche
 
-* Gleichheit `==`, Ungleichheit `!=`
-* Kleiner `<`, Kleiner gleich `<=`
-* Größer `>`, Größer gleich `>=`
+```C
+a == b; a != b; // Gleich, ungleich
+a < b; a > b; // Kleiner, größer
+a <= b; a >= b; // Kleiner gleich, größer gleich
+```
 
-Achtung: `=` und `==` nicht verwechseln!
+* Logisch falsch: 0
+* Logisch wahr: von 0 verschieden
+* Achtung: `=` und `==` nicht verwechseln!
 
 https://en.cppreference.com/w/c/language/operator_comparison
 
 
 ### Zugriff
 
-`&`, `*`, `[]`, `.` und `->`
+```C
+&a; // Speicheradresse von a
+*b; // Inhalt des Speichers mit der Adresse in b
+a.d; // Struktur-Mitglied d
+b->d; // Struktur-Mitglied d, b enthält eine Adresse
+c[i]; // Array-Element mit Offset i
+```
+
+* `&` und `[]` verwenden wir in der 1. Klasse
+* Die Übrigen kommen in der 2. Klasse dazu
  
 https://en.cppreference.com/w/c/language/operator_member_access
 
 
 ### Andere Operatoren
 
-* `sizeof(typ)` und andere
-  * `sizeof` ergibt die Anzahl der notwendigen Bytes
-* https://en.cppreference.com/w/c/language/operator_other
+```C
+sizeof(int); // Anzahl an Bytes für eine Variable des Typs int
+sizeof a; // Anzahl an Bytes für den Wert des Ausdrucks a
+a, b; // Zuerst wird a ausgewertet, dann b.
+      // Der gesamte Ausdruck hat den Wert von b.
+(int) a; // a wird zum Typ int umgewandelt
+a ? b : c; // Wenn a wahr ist wird b ausgewertet, sonst c
+```
+
+* Den ternären Operator `a ? b : c` sparsam einsetzen!
+  * Die Lesbarkeit des Codes leidet ggf. sehr.
+
+https://en.cppreference.com/w/c/language/operator_other
 
 
 
@@ -181,6 +228,21 @@ int baz = 23; // baz ist eine ganze Zahl, ab hier 23
 * Der Typ definiert wie der Platz zu interpretieren ist
   * Man kann den Speicher bei Bedarf auch anders interpretieren (cast)
 
+
+## Sichtbarkeit und Lebensdauer
+
+```C
+int a; // Sichtbarkeit: global
+static int b; // Sichtbarkeit: Datei
+{
+  int c; // Lebensdauer: Block, Sichtbarkeit: Block
+  static int d; // Lebensdauer: Global, Sichtbarkeit: Block
+}
+```
+
+* Globale Variablen sparsam einsetzen!
+
+https://en.cppreference.com/w/c/language/scope
 
 
 ## Deklaration, Definition, Initialisierung
@@ -219,7 +281,9 @@ int bar; // Definition
 ### Initialisierung
 
 ```C
-int baz = 23; // Initialisierung
+int a = 23; // Initialisierung
+const int b = 23; // Initialisierung
+                  // b kann nicht mehr verändert werden
 ```
 
 * Bestimmt den (ersten) Inhalt
@@ -344,6 +408,7 @@ short int b; short c = 42; // mind. 16  bit
 int d = 23;                // mind. 16 bit
 long int e; long f = 5L    // mind. 32 bit
 long long int g; long long h = 7LL; // mind. 64 bit
+
 unsigned char i; // etc. wie oben, aber nur pos. Zahlen
 ``` 
 https://en.cppreference.com/w/c/language/arithmetic_types
@@ -356,6 +421,7 @@ https://en.cppreference.com/w/c/language/arithmetic_types
 int8_t a; int16_t b; int32_t c; int64_t d; // exakt 8, ... bits
 int_fast8_t e; // mindestens 8 bit, die schnellste Variante
 int_least8_t f; // mindestens 8 bit, die kleinste Variante
+
 uint8_t g; // etc. wie oben, aber nur pos. Zahlen
 ``` 
 https://en.cppreference.com/w/c/types/integer
@@ -367,7 +433,9 @@ https://en.cppreference.com/w/c/types/integer
 #include <limits.h>
 long a = LONG_MAX; // je nach Compiler und Platform
 long b = LONG_MIN; // je nach Compiler und Platform
+
 unsigned long c = ULONG_MAX; // je nach Compiler und Platform
+
 // etc.
 ```
 https://en.cppreference.com/w/c/types/limits
