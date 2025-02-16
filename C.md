@@ -229,7 +229,7 @@ int baz = 23; // baz ist eine ganze Zahl, ab hier 23
   * Man kann den Speicher bei Bedarf auch anders interpretieren (cast)
 
 
-## Sichtbarkeit und Lebensdauer
+### Sichtbarkeit und Lebensdauer
 
 ```C
 int a; // Sichtbarkeit: global
@@ -245,7 +245,7 @@ static int b; // Sichtbarkeit: Datei
 https://en.cppreference.com/w/c/language/scope
 
 
-## Deklaration, Definition, Initialisierung
+### Deklaration, Definition, Initialisierung
 
 ```C
 extern int foo; // Deklaration
@@ -254,7 +254,7 @@ int baz = 23; // Initialisierung
 ```
 
 
-### Deklaration
+#### Deklaration
 
 ```C
 extern int foo; // Deklaration
@@ -268,7 +268,7 @@ extern int foo; // Deklaration
 https://en.cppreference.com/w/c/language/declarations
 
 
-### Definition
+#### Definition
 
 ```C
 int bar; // Definition
@@ -278,7 +278,7 @@ int bar; // Definition
   * Bei Funktionen den Inhalt (kommt später)
 
 
-### Initialisierung
+#### Initialisierung
 
 ```C
 int a = 23; // Initialisierung
@@ -298,9 +298,8 @@ https://en.cppreference.com/w/c/language/const
 
 * Bool'sche Werte
 * Ganze Zahlen
-* Fließkommazahlen
+* Gleitkommazahlen
 * Zeichen
-  * Zeichenketten
 
 
 
@@ -366,7 +365,33 @@ https://en.cppreference.com/w/c/language/const
 * `0x1F` ist $1 \cdot 16 + 15 \cdot 1 = 31$
 
 
-### TODO: Fließkommazahlen
+### Negative Zahlen
+
+* Im Zweierkomplement dargestellt
+  * Alle Bits invertieren und 1 addieren
+* Subtraktion wird zur Addition
+* Anzahl an darstellbaren Werten: $2^N$
+* Zahlenbereich: $-2^{N-1} \dots 2^{N-1}-1$
+
+
+### Gleitkommazahlen
+
+* $Z = s \cdot m \cdot b^e$
+  * $s$ ... Vorzeichen
+  * $m$ ... Mantisse ($1 < m < b$)
+  * $b$ ... Basis
+  * $e$ ... Exponent
+
+https://de.wikipedia.org/wiki/Gleitkommazahl
+
+
+### Eigenschaften von Gleitkommazahlen
+
+* Die relative Genauigkeit ist über den gesamten Wertebereich gleich.
+  * Die absolute Genauigkeit variiert
+  * Nicht für Geldbeträge verwenden!
+* Mit $b=2$ (wie am PC) wird $1/10$ periodisch
+  * Es kommt bei anderen Zahlen zu Rundungsfehlern als mit dezimalen Gleitkommazahlen
 
 
 
@@ -375,7 +400,7 @@ https://en.cppreference.com/w/c/language/const
 * Bool'sche Werte
 * Ganze Zahlen
   * mit und ohne Vorzeichen
-* Fließkommazahlen
+* Gleitkommazahlen
   * unterschiedliches Fassungsvermögen
 
 
@@ -405,7 +430,7 @@ bool a = true;
   * z.B. bei der Initialisierung
 
 
-### Ganze Zahlen: unbestimmtes Fassungsvermögen
+#### Ganze Zahlen: unbestimmtes Fassungsvermögen
 
 ```C
 char a = 96;               // mind. 8 bit, sizeof(char) ≥ 1
@@ -419,7 +444,7 @@ unsigned char i; // etc. wie oben, aber nur pos. Zahlen
 https://en.cppreference.com/w/c/language/arithmetic_types
 
 
-### Ganze Zahlen: definiertes Fassungsvermögen
+#### Ganze Zahlen: definiertes Fassungsvermögen
 
 ```C
 #include <stdint.h>
@@ -432,7 +457,7 @@ uint8_t g; // etc. wie oben, aber nur pos. Zahlen
 https://en.cppreference.com/w/c/types/integer
 
 
-### Wertebereichsgrenzen
+#### Wertebereichsgrenzen
 
 ```C
 #include <limits.h>
@@ -446,45 +471,131 @@ unsigned long c = ULONG_MAX; // je nach Compiler und Platform
 https://en.cppreference.com/w/c/types/limits
 
 
-### Fließkommazahlen
+### Gleitkommazahlen
 
-* `float`
-* `double`
-* Literale
-* TODO
+```C
+float a = 0.5f; // 0.5
+double b = 0.5e3; // 500
+long double c = 0.5e4L; // 50000
+```
+
+https://de.wikipedia.org/wiki/IEEE_754
+https://en.cppreference.com/w/c/language/floating_constant
+
+
+#### Besondere Werte
+
+```C
+#include <math.h>
+double a = -5;
+double b = 0;
+double c = a/b; // -inf, siehe INFINITY
+double d = a/c; // 0
+double e = b/b; // -nan, siehe NAN
+double f = atan(INFINITY); // pi/2, weil entlang der y-Achse
+```
+
+https://en.cppreference.com/w/c/header/math
+
+
+#### Wertebereichsgrenzen
+
+```C
+#include <float.h>
+float a = FLT_MIN; // kleinster, positiver Wert
+double b = DBL_MAX; // größter, positiver Wert
+double c = DBL_EPSILON; // Differenz zwischen 1.0 und dem nächsten darstellbaren Wert
+```
+
+https://en.cppreference.com/w/c/header/float
+https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types
+
+
+#### Dezimalstellen
+
+```C
+#include <float.h>
+// text -> float -> text
+FLT_DIG; // typ. 6
+DBL_DIG; // typ. 15
+LDBL_DIG; // typ. 18
+// float -> decimal -> float
+FLT_DECIMAL_DIG;  // min. 6 (typ. 9)
+DBL_DECIMAL_DIG;  // min. 10 (typ. 17)
+LDBL_DECIMAL_DIG; // min. 10 (typ. 21)
+```
+
+https://en.cppreference.com/w/c/header/float
+https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types
 
 
 
 ## Exkurs: Zeichen-Codierung
 
-* ASCII
-* Unicode
-  * UTF-8
-  * UTF-16
-  * UTF-32
-* TODO
+* Computer kennen keine Glyphen, nur Zahlen
+* Eine Codierung weist einem Glyphen eine Zahl zu und umgekehrt
+* ASCII ist historisch weit verbreitet
+  * 0...127 standardisiert
+  * kann per se keine Umlaute etc. (128...255)
+* Unicode ist heutzutage die Zuordnung von Glyphen zu Zahlen
+  * Zahlen zu Bytefolge meist UTF-8
+  * 0...127 ident zu ASCII
+
+https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange
+
+
+### Beispiele
+
+* 'A' ist U+0041 (dez. 65)
+  * ASCII und UTF-8 ident
+* 'Ä' ist U+00C4 (dez. 196)
+  * In ASCII nicht vorhanden
+  * in UTF-8 die Bytefolge 0xc3 0x84 (195, 132)
+* 'Ä' ist U+0041 gefolgt von U+0308
+  * in UTF-8: 0x41 0xcc 0x88 (65, 204, 136)
+
+https://www.unicode.org/charts/
+
+
+### Verarbeitung
+
+* Encodings müssen in der gesamten Verabeitungskette berücksichtigt werden.
+* Wenn alle UTF-8 einsetzen funktioniert es
+* Nicht alle setzen UTF-8 ein
+* Demo: VS Code "Change File Encoding"
 
 
 
 ## Basisdatentypen für Zeichen
 
-* `char`
-* `wchar`
-* Literale
-* TODO
+```C
+char a = 'A';
+printf("%c\n", a); // A
+printf("%d\n", a); // 65
+```
 
+https://en.cppreference.com/w/c/language/character_constant
+https://en.cppreference.com/w/c/language/arithmetic_types
+https://en.cppreference.com/w/c/io/fprintf
 
 
 
 ## Ein- und Ausgabe
 ```C
 #include <stdio.h>
+
+int main(void) {
+  int a = 0;
+  scanf("%i", &a); // & nicht vergessen!
+  printf("%i\n", a); // hier kein &
+}
 ```
-* TODO
+
+Format String: https://en.cppreference.com/w/c/io/fscanf
 
 
 
-## Quellen
+## Allgemeine Quellen
 
 * [cppreference.com](https://en.cppreference.com/w/c)
 * [C17/C18 final draft](https://files.lhmouse.com/standards/ISO%20C%20N2176.pdf)
