@@ -608,7 +608,7 @@ https://en.cppreference.com/w/c/language/arithmetic_types
 https://en.cppreference.com/w/c/io/fprintf
 
 
-## Steuerzeichen in C
+### Steuerzeichen in C
 
 ```C
 '\x0a', '\0' // LF, NUL
