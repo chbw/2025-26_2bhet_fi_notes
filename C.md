@@ -544,15 +544,44 @@ https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types
 https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange
 
 
+### Steuerzeichen
+
+* Die Zeichen 0...31 in ASCII sind Steuerzeichen
+  * selbst nicht darstellbar
+  * beeinflussen ggf. die Darstellung
+
+
+* Genaue Bedeutung hängt vom Umfeld ab
+  * 10/0x0a/"\n"/LF ist ein Zeilenumbruch unter Unix/Linux/BSD/macOS
+  * unter MS-DOS und Windos braucht es CRLF (13,10/0x0d,0x0a/"\r\n")
+  * Programmausgabe unter Windows braucht nur LF für einen Zeilenumbruch, das
+    Terminal macht automatisch aus jedem LF ein CRLF
+  
+https://de.wikipedia.org/wiki/Steuerzeichen
+
+
 ### Beispiele
 
 * 'A' ist U+0041 (dez. 65)
   * ASCII und UTF-8 ident
+  * LATIN CAPITAL LETTER A
+
+
 * 'Ä' ist U+00C4 (dez. 196)
   * In ASCII nicht vorhanden
+  * LATIN CAPITAL LETTER A WITH DIAERESIS
   * in UTF-8 die Bytefolge 0xc3 0x84 (195, 132)
+
+
 * 'Ä' ist U+0041 gefolgt von U+0308
+  * LATIN CAPITAL LETTER A
+  * gefolt von COMBINING DIAERESIS
   * in UTF-8: 0x41 0xcc 0x88 (65, 204, 136)
+
+
+* '🖉' ist U+1F589
+  * LOWER LEFT PENCIL
+  * in UTF-8: 0xf0 0x9f 0x96 0x89 (240, 159, 150, 137)
 
 https://www.unicode.org/charts/
 
@@ -560,8 +589,8 @@ https://www.unicode.org/charts/
 ### Verarbeitung
 
 * Encodings müssen in der gesamten Verabeitungskette berücksichtigt werden.
-* Wenn alle UTF-8 einsetzen funktioniert es
-* Nicht alle setzen UTF-8 ein
+* Wenn überall UTF-8 eingesetzt wird funktioniert alles
+  * Nicht überall wird UTF-8 eingesetzt
 * Demo: VS Code "Change File Encoding"
 
 
@@ -577,6 +606,21 @@ printf("%d\n", a); // 65
 https://en.cppreference.com/w/c/language/character_constant
 https://en.cppreference.com/w/c/language/arithmetic_types
 https://en.cppreference.com/w/c/io/fprintf
+
+
+## Steuerzeichen in C
+
+```C
+'\x0a', '\0' // LF, NUL
+'\a', // audible bell
+'\t', // tab
+'\n', // LF
+'\r', // CR
+'\\', '\'' // \ '
+..
+```
+
+https://en.cppreference.com/w/c/language/escape
 
 
 
