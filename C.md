@@ -630,7 +630,7 @@ https://en.cppreference.com/w/c/language/escape
 
 int main(void) {
   int a = 0;
-  scanf("%i", &a); // & nicht vergessen!
+  scanf_s("%i", &a); // & nicht vergessen!
   printf("%i\n", a); // hier kein &
 }
 ```
