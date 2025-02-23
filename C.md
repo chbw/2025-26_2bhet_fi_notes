@@ -43,12 +43,20 @@ Auch im Block/über mehrere Zeilen möglich
 // execution starts at main()
 int main(void) // Funktion
 { // {} umfassen mehrere Anweisungen zu einem Block
-    printf("%s\n", "Hallo Welt"); // Funktionsaufruf
-    //  der ";" beendet die Anweisung
+  printf("%s\n", "Hallo Welt"); // Funktionsaufruf
+  //  der ";" beendet die Anweisung
 }
 ```
 
 Referenz zur Ausgabe (am Terminal): https://en.cppreference.com/w/c/io/fprintf
+
+
+
+## Codingstandard
+
+Arbeiten mehrere Menschen an einer Codebasis so ist es üblich Dinge ähnlich zu bezeichnen und zu schreiben. Wir wollen uns an den Google C++ Style Guide anlehnen. Achtung: das vollständige Dokument ist sehr detailreich, die wichtigsten Punkte werden nach und nach erwähnt.
+
+https://google.github.io/styleguide/cppguide.html
 
 
 
@@ -219,7 +227,7 @@ https://en.cppreference.com/w/c/language/operator_other
 ## Variablen
 
 ```C
-int baz = 23; // baz ist eine ganze Zahl, ab hier 23
+int number = 23; // number ist eine ganze Zahl, ab hier 23
 ```
 
 * Variablen sind ein Name für Platz im Speicher
@@ -227,6 +235,7 @@ int baz = 23; // baz ist eine ganze Zahl, ab hier 23
   * `int` ist meistens 4 Bytes (32 bits) groß
 * Der Typ definiert wie der Platz zu interpretieren ist
   * Man kann den Speicher bei Bedarf auch anders interpretieren (cast)
+* Der Bezeichner ist immer englisch und mindestens ein Wort (`snake_case`)
 
 
 ### Sichtbarkeit und Lebensdauer
@@ -281,16 +290,26 @@ int bar; // Definition
 #### Initialisierung
 
 ```C
-int a = 23; // Initialisierung
-const int b = 23; // Initialisierung
-                  // b kann nicht mehr verändert werden
+int number = 23; // Initialisierung
 ```
 
 * Bestimmt den (ersten) Inhalt
-  * Vorher ist der Inhalt (meist) nicht bekannt.
+  * Vorher ist der Inhalt (meist) unbekannt.
 * Variablen bei der Definition _immer_ initialisieren!
 
 https://en.cppreference.com/w/c/language/const
+
+
+#### Konstanten
+
+```C
+const int kSpecialNumber = 23; // Initialisierung
+  // kNumber kann nicht mehr verändert werden
+#define MY_CONSTANT 42
+```
+
+* Bezeichner von konstanten Variablen sind CamelCase mit einem führenden k
+* Makros (mit `#define`) sind in Großbuchstaben mit Unterstrich (`_`)
 
 
 
