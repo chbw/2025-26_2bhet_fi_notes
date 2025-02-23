@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Reveal JS presentation</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/black.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1>C</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Kompilierte Sprache</h2>
+<pre style="all:unset;"><div><img class="mermaid" src="https://kroki.io/mermaid/svg/eNpLy8kvT85ILCpR8AniUgCC5PyU1GilBL1kXZfEktTM1LwEpVioRG5BZk5qEZiTWpGaXFqSmJSTCtekoKtrh6oIxgHLIOkAAB-9I7Q=" /></div></pre>
+<pre><code class="language-bash"># compile
+$ gcc -o getting_started main.c
+# run
+$ ./getting_started
+</code></pre>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Grundstruktur</h2>
+<pre><code class="language-C">// Kommentare
+/*
+Auch im Block/über mehrere Zeilen möglich
+*/
+
+// includes
+#include &lt;stdio.h&gt; // für z.B. printf()
+
+// execution starts at main()
+int main(void) // Funktion
+{ // {} umfassen mehrere Anweisungen zu einem Block
+  printf(&quot;%s\n&quot;, &quot;Hallo Welt&quot;); // Funktionsaufruf
+  //  der &quot;;&quot; beendet die Anweisung
+}
+</code></pre>
+<p>Referenz zur Ausgabe (am Terminal): <a href="https://en.cppreference.com/w/c/io/fprintf">https://en.cppreference.com/w/c/io/fprintf</a></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Codingstandard</h2>
+<p>Arbeiten mehrere Menschen an einer Codebasis so ist es üblich Dinge ähnlich zu bezeichnen und zu schreiben. Wir wollen uns an den Google C++ Style Guide anlehnen. Achtung: das vollständige Dokument ist sehr detailreich, die wichtigsten Punkte werden nach und nach erwähnt.</p>
+<p><a href="https://google.github.io/styleguide/cppguide.html">https://google.github.io/styleguide/cppguide.html</a></p>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Anweisungen und Ausdrücke</h2>
+<ul>
+<li>Ausdruck (expression)</li>
+<li>Anweisung (statement)
+<ul>
+<li>Kann als Block zusammengefasst werden</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Ausdruck (expression)</h3>
+<pre><code class="language-C">4 + 5
+a &lt; b
+42
+(23 - 2) * 2
+</code></pre>
+<ul>
+<li>Kombination aus <em>Operatoren</em> und <em>Operanden</em>. Kann ausgewertet werden und dabei einen Wert ergeben.</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/expressions">https://en.cppreference.com/w/c/language/expressions</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Anweisung (statement)</h3>
+<pre><code class="language-C">a = 1 + 2;
+; // leere Anweisung
+{ // Block-Start
+  b = a;
+  c = 3 * b;
+} // Block-Ende
+</code></pre>
+<ul>
+<li>Mit <code>;</code> abgeschlossen, oder mehrere mit <code>{}</code> zu einer Block-Anweisung zusammengefasst.</li>
+<li>Die Zuweisung <code>c = 1 + 2</code> ist auch ein Ausdruck (mit dem Wert 3).</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/statements">https://en.cppreference.com/w/c/language/statements</a></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Operatoren</h2>
+<ul>
+<li>Arithmetische Operatoren</li>
+<li>Zuweisungen</li>
+<li>Inkrement/Dekrement</li>
+<li>Logik</li>
+<li>Vergleich</li>
+<li>Zugriff</li>
+<li>Andere</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Arithmetische Operatoren</h3>
+<pre><code class="language-C">a + b; a - b; // Summe, Differenz
+a * b; a / b; a % b; // Produkt, Quotient, Rest
+~a; a &amp; b; a | b; a ^ b; // Komplement (NICHT), UND, ODER, XOR
+a &lt;&lt; b; a &gt;&gt; b; // Nach links schieben, nach rechts schieben
+#include &lt;iso646.h&gt;
+compl a; a bitand b;// etc.
+</code></pre>
+<ul>
+<li>Die Operator-Rangfolge ist mathematisch sinnvoll (Punkt vor Strich).</li>
+<li>Dennoch immer empfehlenswert: Klammern setzen!</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_alternative">https://en.cppreference.com/w/c/language/operator_alternative</a>
+<a href="https://en.cppreference.com/w/c/language/operator_arithmetic">https://en.cppreference.com/w/c/language/operator_arithmetic</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Zuweisung</h3>
+<pre><code class="language-C">a = 1;
+b = b + 2;
+b += 2; // identisch zu b = b + 2;
+</code></pre>
+<ul>
+<li><code>=</code>, von rechts nach links</li>
+<li>und Kombinationen mit allen arithmetischen Operatoren: <code>+=</code>, <code>-=</code>, etc.</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_assignment">https://en.cppreference.com/w/c/language/operator_assignment</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Inkrement/Dekrement</h3>
+<pre><code class="language-C">++a; --a; // Prefix
+a++; a--; // Postfix
+b = 2 * a++; // zuerst b = 2 * a, dann wird a erhöht
+a = a++; // undefined
+</code></pre>
+<ul>
+<li>Die betroffene Variable nicht mehrmals in einem Ausdruck verwenden!</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_incdec">https://en.cppreference.com/w/c/language/operator_incdec</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Logische Operatoren</h3>
+<pre><code class="language-C">!a; // Nicht
+a &amp;&amp; b; // UND
+a || b; // ODER
+#include &lt;iso646.h&gt;
+not a; a and b; // etc.
+</code></pre>
+<ul>
+<li>Logisch falsch: 0</li>
+<li>Logisch wahr: von 0 verschieden
+<ul>
+<li>Zwei wahr-Werte können unterschiedlich sein!</li>
+</ul>
+</li>
+<li>Nicht mit den bitweisen Operatoren verwechseln!</li>
+</ul>
+<p>Notiz: <a href="https://en.cppreference.com/w/c/language/operator_alternative">iso646.h bei cppreference.com</a>
+<a href="https://en.cppreference.com/w/c/language/operator_logical">https://en.cppreference.com/w/c/language/operator_logical</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Vergleiche</h3>
+<pre><code class="language-C">a == b; a != b; // Gleich, ungleich
+a &lt; b; a &gt; b; // Kleiner, größer
+a &lt;= b; a &gt;= b; // Kleiner gleich, größer gleich
+</code></pre>
+<ul>
+<li>Logisch falsch: 0</li>
+<li>Logisch wahr: von 0 verschieden</li>
+<li>Achtung: <code>=</code> und <code>==</code> nicht verwechseln!</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_comparison">https://en.cppreference.com/w/c/language/operator_comparison</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Zugriff</h3>
+<pre><code class="language-C">&amp;a; // Speicheradresse von a
+*b; // Inhalt des Speichers mit der Adresse in b
+a.d; // Struktur-Mitglied d
+b-&gt;d; // Struktur-Mitglied d, b enthält eine Adresse
+c[i]; // Array-Element mit Offset i
+</code></pre>
+<ul>
+<li><code>&amp;</code> und <code>[]</code> verwenden wir in der 1. Klasse</li>
+<li>Die Übrigen kommen in der 2. Klasse dazu</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_member_access">https://en.cppreference.com/w/c/language/operator_member_access</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Andere Operatoren</h3>
+<pre><code class="language-C">sizeof(int); // Anzahl an Bytes für eine Variable des Typs int
+sizeof a; // Anzahl an Bytes für den Wert des Ausdrucks a
+a, b; // Zuerst wird a ausgewertet, dann b.
+      // Der gesamte Ausdruck hat den Wert von b.
+(int) a; // a wird zum Typ int umgewandelt
+a ? b : c; // Wenn a wahr ist wird b ausgewertet, sonst c
+</code></pre>
+<ul>
+<li>Den ternären Operator <code>a ? b : c</code> sparsam einsetzen!
+<ul>
+<li>Die Lesbarkeit des Codes leidet ggf. sehr.</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/operator_other">https://en.cppreference.com/w/c/language/operator_other</a></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Variablen</h2>
+<pre><code class="language-C">int number = 23; // number ist eine ganze Zahl, ab hier 23
+</code></pre>
+<ul>
+<li>Variablen sind ein Name für Platz im Speicher</li>
+<li>Der Typ definiert wie viel Platz benötigt wird
+<ul>
+<li><code>int</code> ist meistens 4 Bytes (32 bits) groß</li>
+</ul>
+</li>
+<li>Der Typ definiert wie der Platz zu interpretieren ist
+<ul>
+<li>Man kann den Speicher bei Bedarf auch anders interpretieren (cast)</li>
+</ul>
+</li>
+<li>Der Bezeichner ist immer englisch und mindestens ein Wort (<code>snake_case</code>)</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Sichtbarkeit und Lebensdauer</h3>
+<pre><code class="language-C">int a; // Sichtbarkeit: global
+static int b; // Sichtbarkeit: Datei
+{
+  int c; // Lebensdauer: Block, Sichtbarkeit: Block
+  static int d; // Lebensdauer: Global, Sichtbarkeit: Block
+}
+</code></pre>
+<ul>
+<li>Globale Variablen sparsam einsetzen!</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/scope">https://en.cppreference.com/w/c/language/scope</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Deklaration, Definition, Initialisierung</h3>
+<pre><code class="language-C">extern int foo; // Deklaration
+int bar; // Definition
+int baz = 23; // Initialisierung
+</code></pre>
+
+            </section>
+        
+            <section >
+                <h4>Deklaration</h4>
+<pre><code class="language-C">extern int foo; // Deklaration
+// Ab hier ist foo bekannt (und hat einen Datentyp)
+</code></pre>
+<ul>
+<li>Reserviert keinen Speicherplatz.</li>
+<li>Legt nur Typ und Namen fest.</li>
+<li>Kann wiederholt vorkommen.</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/declarations">https://en.cppreference.com/w/c/language/declarations</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Definition</h4>
+<pre><code class="language-C">int bar; // Definition
+</code></pre>
+<ul>
+<li>Reserviert auch den Speicherplatz
+<ul>
+<li>Bei Funktionen den Inhalt (kommt später)</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h4>Initialisierung</h4>
+<pre><code class="language-C">int number = 23; // Initialisierung
+</code></pre>
+<ul>
+<li>Bestimmt den (ersten) Inhalt
+<ul>
+<li>Vorher ist der Inhalt (meist) unbekannt.</li>
+</ul>
+</li>
+<li>Variablen bei der Definition <em>immer</em> initialisieren!</li>
+</ul>
+<p><a href="https://en.cppreference.com/w/c/language/const">https://en.cppreference.com/w/c/language/const</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Konstanten</h4>
+<pre><code class="language-C">const int kSpecialNumber = 23; // Initialisierung
+  // kNumber kann nicht mehr verändert werden
+#define MY_CONSTANT 42
+</code></pre>
+<ul>
+<li>Bezeichner von konstanten Variablen sind CamelCase mit einem führenden k</li>
+<li>Makros (mit <code>#define</code>) sind in Großbuchstaben mit Unterstrich (<code>_</code>)</li>
+</ul>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Basisdatentypen</h2>
+<ul>
+<li>Bool’sche Werte</li>
+<li>Ganze Zahlen</li>
+<li>Gleitkommazahlen</li>
+<li>Zeichen</li>
+</ul>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Exkurs: Zahlensysteme</h2>
+<ul>
+<li>Wir verwenden üblicherweise <em>Stellenwertsysteme</em></li>
+<li>siehe: <a href="https://de.wikipedia.org/wiki/Stellenwertsystem">https://de.wikipedia.org/wiki/Stellenwertsystem</a></li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Stellenwertsysteme</h3>
+<ul>
+<li>Im Dezimalsystem (Basis $b = 10$): Einer, Zehner, Hunderter, …
+<ul>
+<li>Geschrieben in umgekehrter Reihenfolge</li>
+</ul>
+</li>
+<li>$123 = 1 \cdot 10^2 + 2 \cdot 10 + 3 \cdot 1$</li>
+<li>$Z = a_2 \cdot b^2 + a_1 \cdot b^1 + a_0 \cdot b^0$</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Allgemeiner Fall</h3>
+<ul>
+<li>Für $N$ Stellen: $Z = \sum_{i=0}^{N-1} a_i \cdot b^i$</li>
+<li>Anzahl an darstellbaren Werten: $b^N$</li>
+<li>Zahlenbereich: $0 \dots b^N - 1$</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Binärsystem</h3>
+<ul>
+<li>PCs rechnen im Binärsystem ($b=2$)</li>
+<li>Platz ist endlich, z.B. 1 Byte = 8 bit
+<ul>
+<li>$ Z = \sum_{i=0}^{7} a_i \cdot b^i$</li>
+<li>256 Werte: 0…255</li>
+</ul>
+</li>
+<li>Darstellung am Bildschirm/im Code ist länglich
+<ul>
+<li>Andere Basis für die Darstellung notwendig</li>
+<li>Seit C23 mit <code>0b</code>-Präfix möglich</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Oktalsystem</h3>
+<ul>
+<li>Basis $b = 8$ (3 bit)</li>
+<li>Historisch wichtig</li>
+<li>Mit <code>0</code> als Präfix
+<ul>
+<li>Achtung Stolperfalle führende Null bei Dezimalzahlen!</li>
+<li><code>010</code> ist 8, nicht 10!</li>
+</ul>
+</li>
+<li>Demo: <code>ping</code>-Kommando</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Hexadezimalsystem</h3>
+<ul>
+<li>Basis $b = 16$ (4 bit, ein halbes Byte, 1 nibble)</li>
+<li>Symbole 0…9, A…F (a…f) mit Werten 0…15</li>
+<li>Genutzt wenn
+<ul>
+<li>die binäre Darstellung eine Rolle spielt</li>
+<li>die Darstellung als Text unabhängig vom Wert gleich lang sein soll</li>
+</ul>
+</li>
+<li>Mit <code>0x</code> oder <code>0X</code> als Präfix</li>
+<li>Demo: git commit numbers</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Beispiele</h3>
+<ul>
+<li><code>64</code> ist auch <code>0100</code> oder <code>0x40</code>
+<ul>
+<li>und ggf. <code>0b1000000</code></li>
+</ul>
+</li>
+<li><code>127</code> ist auch <code>0177</code> oder <code>0x7f</code> bzw. <code>0x7F</code>
+<ul>
+<li>und ggf. <code>0b1111111</code></li>
+</ul>
+</li>
+<li><code>0x1F</code> ist $1 \cdot 16 + 15 \cdot 1 = 31$</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Negative Zahlen</h3>
+<ul>
+<li>Im Zweierkomplement dargestellt
+<ul>
+<li>Alle Bits invertieren und 1 addieren</li>
+</ul>
+</li>
+<li>Subtraktion wird zur Addition</li>
+<li>Anzahl an darstellbaren Werten: $2^N$</li>
+<li>Zahlenbereich: $-2^{N-1} \dots 2^{N-1}-1$</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Gleitkommazahlen</h3>
+<ul>
+<li>$Z = s \cdot m \cdot b^e$
+<ul>
+<li>$s$ … Vorzeichen</li>
+<li>$m$ … Mantisse ($1 &lt; m &lt; b$)</li>
+<li>$b$ … Basis</li>
+<li>$e$ … Exponent</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://de.wikipedia.org/wiki/Gleitkommazahl">https://de.wikipedia.org/wiki/Gleitkommazahl</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Eigenschaften von Gleitkommazahlen</h3>
+<ul>
+<li>Die relative Genauigkeit ist über den gesamten Wertebereich gleich.
+<ul>
+<li>Die absolute Genauigkeit variiert</li>
+<li>Nicht für Geldbeträge verwenden!</li>
+</ul>
+</li>
+<li>Mit $b=2$ (wie am PC) wird $1/10$ periodisch
+<ul>
+<li>Es kommt bei anderen Zahlen zu Rundungsfehlern als mit dezimalen Gleitkommazahlen</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Basisdatentypen für Zahlen</h2>
+<ul>
+<li>Bool’sche Werte</li>
+<li>Ganze Zahlen
+<ul>
+<li>mit und ohne Vorzeichen</li>
+</ul>
+</li>
+<li>Gleitkommazahlen
+<ul>
+<li>unterschiedliches Fassungsvermögen</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Bool’sche Werte</h3>
+<pre><code class="language-C">#include &lt;stdbool.h&gt;
+bool a = true;
+</code></pre>
+<ul>
+<li>Wahr oder Falsch</li>
+<li>Zwei Literale
+<ul>
+<li><code>true</code> oder <code>false</code></li>
+</ul>
+</li>
+<li>eigentlich ganze Zahlen
+<ul>
+<li><code>false</code> ist 0, alle anderen Werte sind <em>nicht</em> <code>false</code> (<code>true</code> ist nur <em>einer von vielen</em>)</li>
+<li>Niemals auf Gleichheit mit <code>true</code> prüfen!</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3>Ganze Zahlen</h3>
+<ul>
+<li>mit Vorzeichen
+<ul>
+<li>optionales <code>signed</code> vor dem Datentyp, der Default</li>
+</ul>
+</li>
+<li>ohne Vorzeichen
+<ul>
+<li><code>unsigned</code> vor dem Datentyp</li>
+</ul>
+</li>
+<li>Literale
+<ul>
+<li>Wenn man einen konkreten Wert im Code angeben möchte</li>
+<li>z.B. bei der Initialisierung</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h4>Ganze Zahlen: unbestimmtes Fassungsvermögen</h4>
+<pre><code class="language-C">char a = 96;               // mind. 8 bit, sizeof(char) ≥ 1
+short int b; short c = 42; // mind. 16  bit
+int d = 23;                // mind. 16 bit
+long int e; long f = 5L    // mind. 32 bit
+long long int g; long long h = 7LL; // mind. 64 bit
+
+unsigned char i; // etc. wie oben, aber nur pos. Zahlen
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/language/arithmetic_types">https://en.cppreference.com/w/c/language/arithmetic_types</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Ganze Zahlen: definiertes Fassungsvermögen</h4>
+<pre><code class="language-C">#include &lt;stdint.h&gt;
+int8_t a; int16_t b; int32_t c; int64_t d; // exakt 8, ... bits
+int_fast8_t e; // mindestens 8 bit, die schnellste Variante
+int_least8_t f; // mindestens 8 bit, die kleinste Variante
+
+uint8_t g; // etc. wie oben, aber nur pos. Zahlen
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/types/integer">https://en.cppreference.com/w/c/types/integer</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Wertebereichsgrenzen</h4>
+<pre><code class="language-C">#include &lt;limits.h&gt;
+long a = LONG_MAX; // je nach Compiler und Platform
+long b = LONG_MIN; // je nach Compiler und Platform
+
+unsigned long c = ULONG_MAX; // je nach Compiler und Platform
+
+// etc.
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/types/limits">https://en.cppreference.com/w/c/types/limits</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Gleitkommazahlen</h3>
+<pre><code class="language-C">float a = 0.5f; // 0.5
+double b = 0.5e3; // 500
+long double c = 0.5e4L; // 50000
+</code></pre>
+<p><a href="https://de.wikipedia.org/wiki/IEEE_754">https://de.wikipedia.org/wiki/IEEE_754</a>
+<a href="https://en.cppreference.com/w/c/language/floating_constant">https://en.cppreference.com/w/c/language/floating_constant</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Besondere Werte</h4>
+<pre><code class="language-C">#include &lt;math.h&gt;
+double a = -5;
+double b = 0;
+double c = a/b; // -inf, siehe INFINITY
+double d = a/c; // 0
+double e = b/b; // -nan, siehe NAN
+double f = atan(INFINITY); // pi/2, weil entlang der y-Achse
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/header/math">https://en.cppreference.com/w/c/header/math</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Wertebereichsgrenzen</h4>
+<pre><code class="language-C">#include &lt;float.h&gt;
+float a = FLT_MIN; // kleinster, positiver Wert
+double b = DBL_MAX; // größter, positiver Wert
+double c = DBL_EPSILON; // Differenz zwischen 1.0 und dem nächsten darstellbaren Wert
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/header/float">https://en.cppreference.com/w/c/header/float</a>
+<a href="https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types">https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types</a></p>
+
+            </section>
+        
+            <section >
+                <h4>Dezimalstellen</h4>
+<pre><code class="language-C">#include &lt;float.h&gt;
+// text -&gt; float -&gt; text
+FLT_DIG; // typ. 6
+DBL_DIG; // typ. 15
+LDBL_DIG; // typ. 18
+// float -&gt; decimal -&gt; float
+FLT_DECIMAL_DIG;  // min. 6 (typ. 9)
+DBL_DECIMAL_DIG;  // min. 10 (typ. 17)
+LDBL_DECIMAL_DIG; // min. 10 (typ. 21)
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/header/float">https://en.cppreference.com/w/c/header/float</a>
+<a href="https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types">https://en.cppreference.com/w/c/types/limits#Limits_of_floating-point_types</a></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Exkurs: Zeichen-Codierung</h2>
+<ul>
+<li>Computer kennen keine Glyphen, nur Zahlen</li>
+<li>Eine Codierung weist einem Glyphen eine Zahl zu und umgekehrt</li>
+<li>ASCII ist historisch weit verbreitet
+<ul>
+<li>0…127 standardisiert</li>
+<li>kann per se keine Umlaute etc. (128…255)</li>
+</ul>
+</li>
+<li>Unicode ist heutzutage die Zuordnung von Glyphen zu Zahlen
+<ul>
+<li>Zahlen zu Bytefolge meist UTF-8</li>
+<li>0…127 ident zu ASCII</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange">https://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Steuerzeichen</h3>
+<ul>
+<li>Die Zeichen 0…31 in ASCII sind Steuerzeichen
+<ul>
+<li>selbst nicht darstellbar</li>
+<li>beeinflussen ggf. die Darstellung</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <ul>
+<li>Genaue Bedeutung hängt vom Umfeld ab
+<ul>
+<li>10/0x0a/“\n”/LF ist ein Zeilenumbruch unter Unix/Linux/BSD/macOS</li>
+<li>unter MS-DOS und Windos braucht es CRLF (13,10/0x0d,0x0a/“\r\n”)</li>
+<li>Programmausgabe unter Windows braucht nur LF für einen Zeilenumbruch, das
+Terminal macht automatisch aus jedem LF ein CRLF</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://de.wikipedia.org/wiki/Steuerzeichen">https://de.wikipedia.org/wiki/Steuerzeichen</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Beispiele</h3>
+<ul>
+<li>‘A’ ist U+0041 (dez. 65)
+<ul>
+<li>ASCII und UTF-8 ident</li>
+<li>LATIN CAPITAL LETTER A</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <ul>
+<li>‘Ä’ ist U+00C4 (dez. 196)
+<ul>
+<li>In ASCII nicht vorhanden</li>
+<li>LATIN CAPITAL LETTER A WITH DIAERESIS</li>
+<li>in UTF-8 die Bytefolge 0xc3 0x84 (195, 132)</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <ul>
+<li>‘Ä’ ist U+0041 gefolgt von U+0308
+<ul>
+<li>LATIN CAPITAL LETTER A</li>
+<li>gefolt von COMBINING DIAERESIS</li>
+<li>in UTF-8: 0x41 0xcc 0x88 (65, 204, 136)</li>
+</ul>
+</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <ul>
+<li>‘🖉’ ist U+1F589
+<ul>
+<li>LOWER LEFT PENCIL</li>
+<li>in UTF-8: 0xf0 0x9f 0x96 0x89 (240, 159, 150, 137)</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://www.unicode.org/charts/">https://www.unicode.org/charts/</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Verarbeitung</h3>
+<ul>
+<li>Encodings müssen in der gesamten Verabeitungskette berücksichtigt werden.</li>
+<li>Wenn überall UTF-8 eingesetzt wird funktioniert alles
+<ul>
+<li>Nicht überall wird UTF-8 eingesetzt</li>
+</ul>
+</li>
+<li>Demo: VS Code “Change File Encoding”</li>
+</ul>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h2>Basisdatentypen für Zeichen</h2>
+<pre><code class="language-C">char a = 'A';
+printf(&quot;%c\n&quot;, a); // A
+printf(&quot;%d\n&quot;, a); // 65
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/language/character_constant">https://en.cppreference.com/w/c/language/character_constant</a>
+<a href="https://en.cppreference.com/w/c/language/arithmetic_types">https://en.cppreference.com/w/c/language/arithmetic_types</a>
+<a href="https://en.cppreference.com/w/c/io/fprintf">https://en.cppreference.com/w/c/io/fprintf</a></p>
+
+            </section>
+        
+            <section >
+                <h3>Steuerzeichen in C</h3>
+<pre><code class="language-C">'\x0a', '\0' // LF, NUL
+'\a', // audible bell
+'\t', // tab
+'\n', // LF
+'\r', // CR
+'\\', '\'' // \ '
+..
+</code></pre>
+<p><a href="https://en.cppreference.com/w/c/language/escape">https://en.cppreference.com/w/c/language/escape</a></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Ein- und Ausgabe</h2>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main(void) {
+  int a = 0;
+  scanf(&quot;%i&quot;, &amp;a); // &amp; nicht vergessen!
+  printf(&quot;%i\n&quot;, a); // hier kein &amp;
+}
+</code></pre>
+<p>Format String: <a href="https://en.cppreference.com/w/c/io/fscanf">https://en.cppreference.com/w/c/io/fscanf</a></p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2>Allgemeine Quellen</h2>
+<ul>
+<li><a href="https://en.cppreference.com/w/c">cppreference.com</a></li>
+<li><a href="https://files.lhmouse.com/standards/ISO%20C%20N2176.pdf">C17/C18 final draft</a></li>
+<li><a href="https://de.wikibooks.org/wiki/C-Programmierung">Wikibooks: C Programmierung</a></li>
+</ul>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 960,
+			height: 700,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>
