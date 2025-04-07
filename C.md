@@ -658,6 +658,82 @@ Format String: https://en.cppreference.com/w/c/io/fscanf
 
 
 
+## Kontrollstrukturen
+
+Bedingungen
+* `if`
+* `switch`/`case`
+Schleifen
+* `for`
+* `while`
+* `do`/`while`
+
+
+### Einfache Bedingung: `if`
+
+```C
+if (condition)
+  statement;
+else
+  other_statement;
+```
+
+
+### Einfache Bedingung: `if`
+
+```C
+if (condition) {
+  statement;
+}
+else
+{
+  other_statement;
+}
+```
+
+
+### Flussdiagramm `if`
+
+```mermaid
+flowchart TD
+C{condition}
+C --> |true| statement
+C --> |false| other_statement
+statement --> ...
+other_statement --> ...
+```
+
+
+### Mehrere Ausgänge: `switch`
+
+```C
+switch (variable) {
+case constant1:
+  statement;
+case constant2:
+  another_statement;
+  break;
+default:
+  default_statement;
+}
+```
+
+
+### Flussdiagramm `switch`
+
+```mermaid
+flowchart TD
+C{variable?}
+C --> |constant1| statement
+C --> |constant2| another_statement
+C --> |default| default_statement
+statement --> another_statement
+another_statement --> ...
+default_statement --> ...
+
+```
+
+
 ## Allgemeine Quellen
 
 * [cppreference.com](https://en.cppreference.com/w/c)
