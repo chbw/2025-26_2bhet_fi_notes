@@ -663,6 +663,7 @@ Format String: https://en.cppreference.com/w/c/io/fscanf
 Bedingungen
 * `if`
 * `switch`/`case`
+
 Schleifen
 * `for`
 * `while`
@@ -692,7 +693,30 @@ else
 ```
 
 
-### Flussdiagramm `if`
+### Defensive Vergleiche
+
+```C
+// nicht ideal
+if (number == 5) {
+  ...
+}
+// falsch, geht aber durch den Compiler
+if (number = 5) {
+  ...
+}
+// defensive Formulierung
+if (5 == number) {
+  ...
+}
+// falsch, geht nicht durch den Compiler
+if (5 = number) {
+  ...
+}
+```
+
+
+
+#### Flussdiagramm `if`
 
 ```mermaid
 flowchart TD
@@ -719,7 +743,7 @@ default:
 ```
 
 
-### Flussdiagramm `switch`
+#### Flussdiagramm `switch`
 
 ```mermaid
 flowchart TD
@@ -732,6 +756,120 @@ another_statement --> ...
 default_statement --> ...
 
 ```
+
+
+
+### Schleifen
+
+
+#### Kopfgesteuert
+
+`while`-Schleife
+
+```C
+while (condition)
+  statement;
+
+while (condition) {
+  statement;
+}
+```
+
+
+#### Kopfgesteuert - Beispiel 
+
+```C
+// Quadratzahlen von 0 bis 20
+// 0, 1, 4, ... 400
+uint16_t number = 0;
+while (number <= 20) {
+  printf("%d\n", number * number);
+  ++number;
+}
+```
+
+
+#### Kopfgesteuert
+
+```mermaid
+flowchart TD
+prev_statement --> C
+C{condition}
+C --> |true| statement
+statement --> C
+C --> |false| ...
+```
+
+
+#### Fußgesteuert
+
+`do`-`while`-Schleife
+
+```C
+do {
+  statement;
+} while (condition);
+```
+
+
+#### Fußgesteuert - Beispiel 
+
+```C
+// Quadratzahlen von 0 bis 20
+// 0, 1, 4, ... 400
+uint16_t number = 0;
+do {
+  printf("%d\n", number * number);
+  ++number;
+} while (number <= 20);
+```
+```C
+// Variante 2
+uint16_t number = 0;
+do {
+  printf("%d\n", number * number);
+} while (number++ <= 20);
+```
+
+
+#### Fußgesteuert
+
+```mermaid
+flowchart TD
+prev_statement --> statement
+C{condition}
+C --> |true| statement
+statement --> C
+C --> |false| ...
+```
+
+
+#### Zählschleife
+
+`for`-Schleife
+
+```C
+for (pre; condition; post) {
+  statement;
+}
+
+pre;
+while (condition) {
+  statement;
+  post;
+}
+```
+
+#### Zählschleife - Beispiel
+
+```C
+// Quadratzahlen von 0 bis 20
+// 0, 1, 4, ... 400
+for (uint16_t number = 0; number <= 20; ++number) {
+  printf("%d\n", number * number);
+}
+```
+
 
 
 ## Allgemeine Quellen
