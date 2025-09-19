@@ -871,6 +871,38 @@ for (uint16_t number = 0; number <= 20; ++number) {
 ```
 
 
+## Arrays und Pointer
+
+Arrays sind gewissermaßen eine Liste von gleichartigen Dingen.
+
+
+```C
+    int my_array[] = { 4, 0x5, 06 }; // Compiler zählt die Anzahl (hier 3).
+    int my_other_array[5]; // Ein Array mit Platz für 5 Elemente.
+```
+
+Zugriff auf Elemente über den Index (Offset vom ersten Element).
+```C
+    my_array[0]; // 4
+```
+
+Der Index darf nicht über die Array-Grenzen hinaus gehen (Anzahl der Elemente - 1).
+
+```C
+  my_array[3]; // Nicht erlaubt! Aber grundsätzlich möglich.
+```
+
+Wenn die Array-Definition in Scope ist (d.h. innerhalb der selben geschwungenen Klammern erfolgt ist), dann ist `sizeof` ggf. hilfreich.
+
+```C
+    int my_array[] = {4, 0x5, 06};
+    sizeof(my_array); // 12 auf WU's notebook
+    sizeof(my_array[0]); // 4 auf WU's notebook
+    sizeof(my_array)/sizeof(my_array[0]); // Die Anzahl der Elemente
+
+```
+
+
 
 ## Allgemeine Quellen
 
