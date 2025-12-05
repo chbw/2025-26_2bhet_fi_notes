@@ -903,6 +903,64 @@ Wenn die Array-Definition in Scope ist (d.h. innerhalb der selben geschwungenen 
 ```
 
 
+## Funktionen
+
+Haben Parameter, liefern ein Ergebnis und haben keine Nebeneffekte. Prozeduren haben Nebeneffekte und müssen keinen Rückgabewert haben.
+
+```C
+int main(void); // Diese Funktion wird beim Programmstart aufgerufen
+int max(int a, int b); // Vorwärts-Deklaration
+```
+Datentyp_des_Rückgabewerts Name_der_Funktion(Datentyp1 Parameter1, ...)
+
+```C
+#include <stdio.h>
+
+int max(int a, int b); // Vorwärts-Deklaration
+
+int main(void) {
+    prinf("%d", max(3, 6));
+}
+
+int max(int a, int b) {
+    if(a > b) {
+        return a;
+    }
+    return b;
+}
+```
+
+### Call by value vs. call by reference
+
+C ist call by value
+
+```C
+int square(int num) {
+    num = num*num;
+    return num;
+}
+
+int main(void) {
+    int num = 4;
+    int bar = 0;
+    square(num); // does nothing
+    bar = square(num); // bar is 16, num is still 4
+}
+```
+
+Will man Variablen außerhalb der Funktion verändern, dann muss man der Funktion einen Pointer übergeben. Ein Pointer ist die Adresse einer Variablen (vom entsprechenden Typ). Einen Pointer kann man dereferenzieren um auf den Inhalt der Adresse zuzugreifen.
+
+```C
+void squareInPlace(int *num_pointer) {
+    *num_pointer = (*num_pointer) * (*num_pointer);
+}
+
+int main(void) {
+    int num = 4;
+    squareInPlace(&num); // num is 16 after this line
+}
+```
+
 
 ## Allgemeine Quellen
 
